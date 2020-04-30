@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Mixer</title>
+  </head>
+  <body>
+    <header><h1>Music Mixer</h1></header>
+    <div class="keys">
+      <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span class="sound">press</span>
+      </div>
+      <div data-key="83" class="key">
+        <kbd>s</kbd><span class="sound">press</span>
+      </div>
+      <div data-key="68" class="key">
+        <kbd>d</kbd><span class="sound">press</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>f</kbd><span class="sound">press</span>
+      </div>
+      <div data-key="71" class="key">
+        <kbd>g</kbd><span class="sound">press</span>
+      </div>
+      <div data-key="72" class="key">
+        <kbd>h</kbd><span class="sound">press</span>
+      </div>
+      <div data-key="74" class="key">
+        <kbd>j</kbd><span class="sound">press</span>
+      </div>
+      <div data-key="75" class="key">
+        <kbd>k</kbd><span class="sound">press</span>
+      </div>
+    </div>
+    <audio data-key="65" src="1.mp3"></audio>
+    <audio data-key="83" src="2.mp3"></audio>
+    <audio data-key="68" src="3.mp3"></audio>
+    <audio data-key="70" src="4.mp3"></audio>
+    <audio data-key="71" src="5.mp3"></audio>
+    <audio data-key="72" src="6.mp3"></audio>
+    <audio data-key="74" src="7.mp3"></audio>
+    <audio data-key="75" src="8.mp3"></audio>
+    <script>
+      window.addEventListener("keydown", function (e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        audio.currentTime = 0;
+        console.log(e.keyCode);
+        if (!audio) return;
+        audio.play();
+      });
+
+      document.querySelectorAll(".key").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          //handle click
+          var val = event.originalTarget.attributes[0].nodeValue;
+          const audio = document.querySelector(`audio[data-key="${val}"]`);
+          audio.currentTime = 0;
+          if (!audio) return;
+          audio.play();
+        });
+      });
+    </script>
+    <style>
+      html {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: linear-gradient(#aaeeff, #33ff22);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        display: grid;
+        margin: 0;
+      }
+      .keys {
+        position: relative;
+        text-align: center;
+      }
+      .key {
+        border-radius: 5px;
+        margin: 5px;
+        display: inline-block;
+        padding: 1.5rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        background: rgba(255, 0, 0, 0.7);
+      }
+      kbd {
+        font-size: 2rem;
+        text-transform: uppercase;
+      }
+      .sound {
+        display: block;
+      }
+      header {
+        margin: 0 auto;
+        font-family: sans-serif;
+        color: chocolate;
+      }
+      .key:hover {
+        background: cornflowerblue;
+      }
+    </style>
+  </body>
+</html>
